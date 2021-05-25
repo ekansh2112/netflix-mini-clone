@@ -1,24 +1,47 @@
+import HomePage from "./Pages/HomePage";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import Banner from "./Components/Banner";
-import Nav from "./Components/Nav";
-import Row from "./Components/Row";
-import requests from "./requests";
+import LoginPage from "./Pages/LoginPage";
+import { useEffect } from "react";
+import { auth } from "./firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout, selectUser } from "./features/userSlice";
+import ProfilePage from "./Pages/ProfilePage";
 function App() {
+	const dispatch = useDispatch();
+	const user = useSelector(selectUser);
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+			if (userAuth) {
+				console.log("LOGGED-IN", userAuth);
+				dispatch(
+					login({
+						uid: userAuth.uid,
+						email: userAuth.email,
+					})
+				);
+			} else {
+				dispatch(logout());
+			}
+		});
+		return unsubscribe;
+	}, [dispatch]);
 	return (
 		<div className="App">
-			{/* navbar */}
-			<Nav />
-			{/* banner */}
-			<Banner />
-			{/* rows */}
-			<Row title="Netflix Originals" fetchURL={requests.fetchNetflixOriginals} isLarge />
-			<Row title="Trending" fetchURL={requests.fetchTrending} />
-			<Row title="Top Rated" fetchURL={requests.fetchTopRated} />
-			<Row title="Romance" fetchURL={requests.fetchRomanceMovies} />
-			<Row title="Horror" fetchURL={requests.fetchHorrorMovies} />
-			<Row title="Action" fetchURL={requests.fetchActionMovies} />
-			<Row title="Comedy" fetchURL={requests.fetchComedyMovies} />
-			<Row title="Documentaries" fetchURL={requests.fetchDocumentaries} />
+			<Router>
+				{!user ? (
+					<LoginPage />
+				) : (
+					<Switch>
+						<Route exact path="/">
+							<HomePage />
+						</Route>
+						<Route exact path="/profile">
+							<ProfilePage />
+						</Route>
+					</Switch>
+				)}
+			</Router>
 		</div>
 	);
 }

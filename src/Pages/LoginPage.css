@@ -1,0 +1,80 @@
+.loginscreen_logo {
+	position: fixed;
+	left: 0;
+	padding: 5px;
+	height: 2.6rem;
+	width: 5.2rem;
+}
+
+.loginscreen_btn {
+	position: fixed;
+	right: 0;
+	height: 2.3rem;
+	margin: 10px;
+	width: 5.2rem;
+	background-color: rgba(211, 15, 15, 0.979);
+	border: none;
+	font-size: larger;
+	color: aliceblue;
+	font-weight: 800;
+}
+
+.loginscreen_btn:hover {
+	background-color: rgb(190, 11, 11);
+}
+.loginscreen {
+	position: relative;
+	height: 100%;
+	background: url("https://cdn.hipwallpaper.com/i/98/21/dUyCkp.jpg") center no-repeat;
+	background-size: cover;
+}
+
+.loginscreen_gradient {
+	width: 100%;
+	/* z-index: 1; */
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.4);
+	background-image: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.loginscreen_body {
+	position: absolute;
+	left: 0rem;
+	right: 0rem;
+	top: 30%;
+	text-align: center;
+	padding: 20px;
+	color: white;
+}
+
+.loginscreen_body > h1 {
+	margin-bottom: 20px;
+}
+.loginscreen_body > h1 {
+	margin-bottom: 20px;
+}
+
+.loginscreen_form {
+	padding: 20px;
+}
+
+.form_input {
+	padding: 10px;
+	border: none;
+	height: 20px;
+	width: 30%;
+	max-width: 600px;
+	outline-width: 0;
+}
+
+.form_btn {
+	padding: 12.1px;
+	border: none;
+	background-color: red;
+	color: white;
+	font-size: 1rem;
+	font-weight: 800;
+}
+.form_btn:hover {
+	background-color: rgb(190, 0, 0);
+}
